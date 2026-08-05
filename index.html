@@ -9,9 +9,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" />
 
-  <!-- Google Fonts: Playfair Display & Montserrat -->
+  <!-- Preconnect & Preload for performance -->
+  <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
+  <link rel="dns-prefetch" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
 
   <style>
@@ -43,6 +46,8 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
+      overflow-x: hidden;
+      max-width: 100vw;
     }
 
     body {
@@ -51,6 +56,9 @@
       color: var(--color-text-dark);
       line-height: 1.8;
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+      position: relative;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -352,12 +360,17 @@
 
     /* SECTION CONTAINERS */
     .section-padding {
-      padding: 6rem 2rem;
+      padding: 6rem 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
 
     .container {
       max-width: 1200px;
+      width: 100%;
       margin: 0 auto;
+      box-sizing: border-box;
     }
 
     .section-header {
@@ -379,13 +392,15 @@
     .about-intro-card {
       background: var(--color-white);
       border-radius: var(--radius-lg);
-      padding: 3.5rem 3rem;
+      padding: 3.5rem 2rem;
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(139, 90, 43, 0.12);
       text-align: center;
       max-width: 900px;
+      width: 100%;
       margin: 0 auto 4rem;
       position: relative;
+      box-sizing: border-box;
     }
 
     .about-intro-text {
@@ -397,18 +412,20 @@
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
+      width: 100%;
     }
 
     .feature-card {
       background: var(--color-white);
       border-radius: var(--radius-sm);
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       border: 1px solid rgba(139, 90, 43, 0.12);
       box-shadow: var(--shadow-soft);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-sizing: border-box;
     }
 
     .feature-card:hover {
@@ -443,8 +460,9 @@
 
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2.2rem;
+      width: 100%;
     }
 
     .product-card {
@@ -648,8 +666,9 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.2rem;
+      width: 100%;
     }
 
     .gallery-item {
@@ -659,6 +678,7 @@
       aspect-ratio: 4 / 3;
       border: 1px solid rgba(200, 155, 74, 0.25);
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      width: 100%;
     }
 
     .gallery-item img {
@@ -903,15 +923,54 @@
       }
 
       .section-padding {
-        padding: 4.5rem 1.25rem;
+        padding: 4rem 1rem;
       }
 
       .about-intro-card {
-        padding: 2.5rem 1.5rem;
+        padding: 2.2rem 1.25rem;
       }
 
       .order-card {
-        padding: 2.5rem 1.5rem;
+        padding: 2.2rem 1.25rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 8vw, 3.2rem);
+        word-break: break-word;
+      }
+
+      .hero-subtitle {
+        font-size: 1.05rem;
+      }
+
+      .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .hero-badge {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+
+      .footer-links {
+        gap: 1rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-padding {
+        padding: 3.5rem 0.85rem;
+      }
+
+      .features-grid, .products-grid, .gallery-grid, .delivery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gift-title {
+        font-size: 1.8rem;
       }
     }
   </style>
@@ -922,7 +981,7 @@
   <header id="header">
     <div class="nav-container">
       <a href="#" class="brand-logo-group" id="brand-link">
-        <img src="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" alt="Manufaktura Dzikie Smaki Logo" class="brand-logo-img" id="logo-img" />
+        <img src="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" alt="Manufaktura Dzikie Smaki Logo" class="brand-logo-img" id="logo-img" decoding="async" />
         <div class="brand-text">
           <span class="title">MANUFAKTURA</span>
           <span class="subtitle">DZIKIE SMAKI</span>
@@ -1104,7 +1163,7 @@
         </div>
 
         <div class="gift-image-wrap">
-          <img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Prezent z dziczyzny" />
+          <img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Prezent z dziczyzny" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -1120,21 +1179,22 @@
       </div>
 
       <div class="gallery-grid" id="gallery-grid-box">
-        <div class="gallery-item"><img src="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg" alt="Manufaktura Dzikie Smaki 1" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/rpNcrfrJ/630345061-122112636921174693-5839651336336808522-n.jpg" alt="Manufaktura Dzikie Smaki 2" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/C1M0HbGr/630401519-122112636981174693-370447852153327996-n.jpg" alt="Manufaktura Dzikie Smaki 3" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/jj4K7M7v/630456540-122112636933174693-6564696983105012749-n.jpg" alt="Manufaktura Dzikie Smaki 4" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Manufaktura Dzikie Smaki 5" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/LX4SBjt0/631296072-122112638031174693-6772932869862572595-n.jpg" alt="Manufaktura Dzikie Smaki 6" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/pdJxFsF8/631325370-122112636873174693-7640264932807721455-n.jpg" alt="Manufaktura Dzikie Smaki 7" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/NMGt7R8B/631607049-122112638067174693-1642551042504905272-n.jpg" alt="Manufaktura Dzikie Smaki 8" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/SKfqMgMM/631957731-122112636843174693-1606706235513292191-n.jpg" alt="Manufaktura Dzikie Smaki 9" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/MTsSsXtq/632079025-122112638259174693-1822346211396913989-n.jpg" alt="Manufaktura Dzikie Smaki 10" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/YSzkWdWn/632306272-122112636945174693-3849087753614106405-n.jpg" alt="Manufaktura Dzikie Smaki 11" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/wvxzcDX2/632815970-122112636957174693-5181515330299391781-n.jpg" alt="Manufaktura Dzikie Smaki 12" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/VNW1CKCt/632953481-122112636885174693-9041687122447456456-n.jpg" alt="Manufaktura Dzikie Smaki 13" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/4d4Gbp6D/633414377-122112638055174693-8775411430579560967-n.jpg" alt="Manufaktura Dzikie Smaki 14" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/FK4NzM7K/706418715-122125067229174693-167181512608935399-n.jpg" alt="Manufaktura Dzikie Smaki 15" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg" alt="Manufaktura Dzikie Smaki 1" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/rpNcrfrJ/630345061-122112636921174693-5839651336336808522-n.jpg" alt="Manufaktura Dzikie Smaki 2" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/C1M0HbGr/630401519-122112636981174693-370447852153327996-n.jpg" alt="Manufaktura Dzikie Smaki 3" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/jj4K7M7v/630456540-122112636933174693-6564696983105012749-n.jpg" alt="Manufaktura Dzikie Smaki 4" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Manufaktura Dzikie Smaki 5" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/LX4SBjt0/631296072-122112638031174693-6772932869862572595-n.jpg" alt="Manufaktura Dzikie Smaki 6" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/pdJxFsF8/631325370-122112636873174693-7640264932807721455-n.jpg" alt="Manufaktura Dzikie Smaki 7" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/NMGt7R8B/631607049-122112638067174693-1642551042504905272-n.jpg" alt="Manufaktura Dzikie Smaki 8" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/SKfqMgMM/631957731-122112636843174693-1606706235513292191-n.jpg" alt="Manufaktura Dzikie Smaki 9" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/MTsSsXtq/632079025-122112638259174693-1822346211396913989-n.jpg" alt="Manufaktura Dzikie Smaki 10" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/YSzkWdWn/632306272-122112636945174693-3849087753614106405-n.jpg" alt="Manufaktura Dzikie Smaki 11" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/wvxzcDX2/632815970-122112636957174693-5181515330299391781-n.jpg" alt="Manufaktura Dzikie Smaki 12" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/VNW1CKCt/632953481-122112636885174693-9041687122447456456-n.jpg" alt="Manufaktura Dzikie Smaki 13" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/4d4Gbp6D/633414377-122112638055174693-8775411430579560967-n.jpg" alt="Manufaktura Dzikie Smaki 14" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/FK4NzM7K/706418715-122125067229174693-167181512608935399-n.jpg" alt="Manufaktura Dzikie Smaki 15" loading="lazy" decoding="async" /></div>
+      </div>
       </div>
     </div>
   </section>
