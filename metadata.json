@@ -1,0 +1,6 @@
+{
+  "name": "Manufaktura Dzikie Smaki",
+  "description": "Wyroby z dziczyzny, tradycyjne wędliny i naturalnie wędzone produkty z Gdańska.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
