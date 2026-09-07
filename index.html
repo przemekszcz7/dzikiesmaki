@@ -10,11 +10,12 @@
   <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" />
 
   <!-- Preconnect & Preload for performance -->
-  <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
+  <link rel="preconnect" href="https://i.postimg.cc" />
   <link rel="dns-prefetch" href="https://i.postimg.cc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
 
   <style>
@@ -47,7 +48,7 @@
       scroll-behavior: smooth;
       font-size: 16px;
       overflow-x: hidden;
-      max-width: 100vw;
+      width: 100%;
     }
 
     body {
@@ -57,9 +58,14 @@
       line-height: 1.8;
       overflow-x: hidden;
       width: 100%;
-      max-width: 100vw;
       position: relative;
       -webkit-font-smoothing: antialiased;
+    }
+
+    /* Prevent mobile text clipping */
+    h1, h2, h3, h4, p, span, a, li, label, div {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     img {
@@ -81,11 +87,13 @@
     }
 
     h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
+      font-size: clamp(2rem, 7vw, 5rem);
+      hyphens: auto;
     }
 
     h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.65rem, 4.5vw, 2.8rem);
+      hyphens: auto;
     }
 
     .small-label {
@@ -116,17 +124,27 @@
       align-items: center;
       justify-content: center;
       gap: 0.6rem;
-      padding: 1rem 2.2rem;
+      padding: 1rem 2rem;
       border-radius: 999px;
       font-family: var(--font-body);
       font-weight: 600;
       font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       border: 2px solid transparent;
-      white-space: nowrap;
+      max-width: 100%;
+      box-sizing: border-box;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    @media (min-width: 641px) {
+      .btn {
+        white-space: nowrap;
+      }
     }
 
     .btn-gold {
@@ -282,27 +300,39 @@
     .hero-section {
       position: relative;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 7rem 2rem 4rem;
-      background-image: url('https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      padding: 7rem 1.5rem 4rem;
       color: var(--color-white);
+      background-color: var(--color-dark-wood);
+      overflow: hidden;
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      transform: scale(1.02);
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at center, rgba(20, 10, 5, 0.45) 0%, rgba(20, 10, 5, 0.75) 100%);
+      z-index: 2;
+      background: radial-gradient(circle at center, rgba(20, 10, 5, 0.45) 0%, rgba(20, 10, 5, 0.78) 100%);
     }
 
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 900px;
+      width: 100%;
       text-align: center;
     }
 
@@ -310,22 +340,26 @@
       color: var(--color-white);
       margin-bottom: 1rem;
       text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      font-size: clamp(1.75rem, 6.5vw, 4.2rem);
+      line-height: 1.15;
     }
 
     .hero-subtitle {
       font-family: var(--font-heading);
-      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-size: clamp(1.05rem, 2.5vw, 1.6rem);
       font-weight: 500;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 0.75rem;
+      line-height: 1.45;
     }
 
     .hero-description {
-      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-size: clamp(0.92rem, 2vw, 1.2rem);
       color: var(--color-gold);
       font-weight: 600;
       margin-bottom: 2.5rem;
       letter-spacing: 0.05em;
+      line-height: 1.5;
     }
 
     .hero-buttons {
@@ -334,15 +368,17 @@
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 3rem;
+      width: 100%;
     }
 
     .hero-badges {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.2rem;
       flex-wrap: wrap;
       padding-top: 1.5rem;
       border-top: 1px solid rgba(200, 155, 74, 0.3);
+      width: 100%;
     }
 
     .hero-badge-item {
@@ -351,11 +387,12 @@
       gap: 0.5rem;
       background: rgba(58, 33, 21, 0.65);
       border: 1px solid rgba(200, 155, 74, 0.4);
-      padding: 0.6rem 1.4rem;
+      padding: 0.6rem 1.3rem;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
       backdrop-filter: blur(6px);
+      max-width: 100%;
     }
 
     /* SECTION CONTAINERS */
@@ -624,11 +661,12 @@
 
     .gift-features-list li {
       display: flex;
-      align-items: center;
-      gap: 0.8rem;
+      align-items: flex-start;
+      gap: 0.85rem;
       font-weight: 600;
       color: var(--color-dark-wood);
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.85rem;
+      line-height: 1.5;
     }
 
     .gift-features-list li::before {
@@ -636,13 +674,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      min-height: 22px;
+      max-width: 22px;
+      max-height: 22px;
+      flex-shrink: 0;
       background-color: var(--color-gold);
       color: var(--color-dark-wood);
       border-radius: 50%;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: bold;
+      line-height: 1;
+      margin-top: 2px;
+      box-sizing: border-box;
     }
 
     .gift-image-wrap {
@@ -676,20 +722,25 @@
       border-radius: var(--radius-sm);
       overflow: hidden;
       aspect-ratio: 4 / 3;
+      background-color: #25140C;
       border: 1px solid rgba(200, 155, 74, 0.25);
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
       width: 100%;
+      content-visibility: auto;
+      contain-intrinsic-size: 260px 195px;
     }
 
     .gallery-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+      opacity: 0.95;
     }
 
-    .gallery-item:hover img {
+    .gallery-item img:hover {
       transform: scale(1.08);
+      opacity: 1;
     }
 
     /* ORDER SECTION */
@@ -869,6 +920,31 @@
     }
 
     @media (max-width: 768px) {
+      .nav-container {
+        padding: 0.75rem 1rem;
+      }
+
+      .brand-logo-group {
+        gap: 0.65rem;
+        max-width: calc(100% - 52px);
+      }
+
+      .brand-logo-img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-text .title {
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+
+      .brand-text .subtitle {
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+      }
+
       .nav-toggle-label {
         display: flex;
       }
@@ -919,58 +995,103 @@
       }
 
       .hero-section {
-        padding-top: 8rem;
+        padding: 6.5rem 1rem 3.5rem;
       }
 
-      .section-padding {
-        padding: 4rem 1rem;
-      }
-
-      .about-intro-card {
-        padding: 2.2rem 1.25rem;
-      }
-
-      .order-card {
-        padding: 2.2rem 1.25rem;
-      }
-
-      .hero-title {
-        font-size: clamp(2rem, 8vw, 3.2rem);
-        word-break: break-word;
-      }
-
-      .hero-subtitle {
-        font-size: 1.05rem;
-      }
-
-      .hero-badges {
+      .hero-buttons {
         flex-direction: column;
         align-items: center;
         gap: 0.75rem;
       }
 
-      .hero-badge {
+      .hero-buttons .btn {
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
+        padding: 0.85rem 1.25rem;
+        font-size: 0.88rem;
+      }
+
+      .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .hero-badge-item {
+        width: 100%;
+        max-width: 270px;
         justify-content: center;
+        font-size: 0.85rem;
+        padding: 0.55rem 1rem;
+      }
+
+      .section-padding {
+        padding: 3.8rem 1rem;
+      }
+
+      .about-intro-card {
+        padding: 2.2rem 1.2rem;
+      }
+
+      .smokehouse-highlight-card {
+        padding: 2.2rem 1.2rem;
+      }
+
+      .order-card {
+        padding: 2.2rem 1.2rem;
+      }
+
+      .order-card .btn {
+        width: 100%;
+        max-width: 340px;
+        padding: 0.95rem 1.25rem;
+        font-size: 0.88rem;
+      }
+
+      .gift-box {
+        padding: 2.2rem 1.2rem;
+        gap: 2rem;
+      }
+
+      .gift-content .btn {
+        width: 100%;
+        max-width: 300px;
+        padding: 0.9rem 1.25rem;
+        font-size: 0.88rem;
       }
 
       .footer-links {
-        gap: 1rem 1.5rem;
+        gap: 0.8rem 1.2rem;
       }
     }
 
     @media (max-width: 480px) {
       .section-padding {
-        padding: 3.5rem 0.85rem;
+        padding: 3.2rem 0.75rem;
       }
 
       .features-grid, .products-grid, .gallery-grid, .delivery-grid {
         grid-template-columns: 1fr;
       }
 
-      .gift-title {
-        font-size: 1.8rem;
+      .feature-card {
+        padding: 2rem 1.2rem;
+      }
+
+      .product-card-body {
+        padding: 1.6rem 1.2rem;
+      }
+
+      .delivery-card {
+        padding: 2rem 1.2rem;
+      }
+
+      .social-link {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        font-size: 0.88rem;
+        padding: 0.75rem 1.2rem;
       }
     }
   </style>
@@ -981,7 +1102,7 @@
   <header id="header">
     <div class="nav-container">
       <a href="#" class="brand-logo-group" id="brand-link">
-        <img src="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" alt="Manufaktura Dzikie Smaki Logo" class="brand-logo-img" id="logo-img" decoding="async" />
+        <img src="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" alt="Manufaktura Dzikie Smaki Logo" class="brand-logo-img" id="logo-img" width="42" height="42" fetchpriority="high" decoding="async" />
         <div class="brand-text">
           <span class="title">MANUFAKTURA</span>
           <span class="subtitle">DZIKIE SMAKI</span>
@@ -989,7 +1110,7 @@
       </a>
 
       <input type="checkbox" id="nav-toggle" />
-      <label for="nav-toggle" class="nav-toggle-label" id="mobile-hamburger">
+      <label for="nav-toggle" class="nav-toggle-label" id="mobile-hamburger" aria-label="Menu">
         <span></span>
         <span></span>
         <span></span>
@@ -1010,6 +1131,15 @@
 
   <!-- 2. HERO SECTION -->
   <section class="hero-section" id="hero">
+    <img
+      src="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg"
+      alt="Manufaktura Dzikie Smaki – Tradycyjne wyroby z dziczyzny"
+      class="hero-bg-img"
+      fetchpriority="high"
+      decoding="async"
+      width="1920"
+      height="1080"
+    />
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="small-label">GDAŃSK · NATURALNIE DZIKA JAKOŚĆ</span>
@@ -1163,7 +1293,7 @@
         </div>
 
         <div class="gift-image-wrap">
-          <img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Prezent z dziczyzny" loading="lazy" decoding="async" />
+          <img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Prezent z dziczyzny" width="600" height="450" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -1179,22 +1309,21 @@
       </div>
 
       <div class="gallery-grid" id="gallery-grid-box">
-        <div class="gallery-item"><img src="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg" alt="Manufaktura Dzikie Smaki 1" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/rpNcrfrJ/630345061-122112636921174693-5839651336336808522-n.jpg" alt="Manufaktura Dzikie Smaki 2" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/C1M0HbGr/630401519-122112636981174693-370447852153327996-n.jpg" alt="Manufaktura Dzikie Smaki 3" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/jj4K7M7v/630456540-122112636933174693-6564696983105012749-n.jpg" alt="Manufaktura Dzikie Smaki 4" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Manufaktura Dzikie Smaki 5" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/LX4SBjt0/631296072-122112638031174693-6772932869862572595-n.jpg" alt="Manufaktura Dzikie Smaki 6" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/pdJxFsF8/631325370-122112636873174693-7640264932807721455-n.jpg" alt="Manufaktura Dzikie Smaki 7" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/NMGt7R8B/631607049-122112638067174693-1642551042504905272-n.jpg" alt="Manufaktura Dzikie Smaki 8" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/SKfqMgMM/631957731-122112636843174693-1606706235513292191-n.jpg" alt="Manufaktura Dzikie Smaki 9" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/MTsSsXtq/632079025-122112638259174693-1822346211396913989-n.jpg" alt="Manufaktura Dzikie Smaki 10" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/YSzkWdWn/632306272-122112636945174693-3849087753614106405-n.jpg" alt="Manufaktura Dzikie Smaki 11" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/wvxzcDX2/632815970-122112636957174693-5181515330299391781-n.jpg" alt="Manufaktura Dzikie Smaki 12" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/VNW1CKCt/632953481-122112636885174693-9041687122447456456-n.jpg" alt="Manufaktura Dzikie Smaki 13" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/4d4Gbp6D/633414377-122112638055174693-8775411430579560967-n.jpg" alt="Manufaktura Dzikie Smaki 14" loading="lazy" decoding="async" /></div>
-        <div class="gallery-item"><img src="https://i.postimg.cc/FK4NzM7K/706418715-122125067229174693-167181512608935399-n.jpg" alt="Manufaktura Dzikie Smaki 15" loading="lazy" decoding="async" /></div>
-      </div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/6QfwvMvG/630154155-122112636813174693-6521774855700772962-n.jpg" alt="Manufaktura Dzikie Smaki 1" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/rpNcrfrJ/630345061-122112636921174693-5839651336336808522-n.jpg" alt="Manufaktura Dzikie Smaki 2" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/C1M0HbGr/630401519-122112636981174693-370447852153327996-n.jpg" alt="Manufaktura Dzikie Smaki 3" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/jj4K7M7v/630456540-122112636933174693-6564696983105012749-n.jpg" alt="Manufaktura Dzikie Smaki 4" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/SsZhZjVp/630533554-122112638079174693-3378826779890596350-n.jpg" alt="Manufaktura Dzikie Smaki 5" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/LX4SBjt0/631296072-122112638031174693-6772932869862572595-n.jpg" alt="Manufaktura Dzikie Smaki 6" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/pdJxFsF8/631325370-122112636873174693-7640264932807721455-n.jpg" alt="Manufaktura Dzikie Smaki 7" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/NMGt7R8B/631607049-122112638067174693-1642551042504905272-n.jpg" alt="Manufaktura Dzikie Smaki 8" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/SKfqMgMM/631957731-122112636843174693-1606706235513292191-n.jpg" alt="Manufaktura Dzikie Smaki 9" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/MTsSsXtq/632079025-122112638259174693-1822346211396913989-n.jpg" alt="Manufaktura Dzikie Smaki 10" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/YSzkWdWn/632306272-122112636945174693-3849087753614106405-n.jpg" alt="Manufaktura Dzikie Smaki 11" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/wvxzcDX2/632815970-122112636957174693-5181515330299391781-n.jpg" alt="Manufaktura Dzikie Smaki 12" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/VNW1CKCt/632953481-122112636885174693-9041687122447456456-n.jpg" alt="Manufaktura Dzikie Smaki 13" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/4d4Gbp6D/633414377-122112638055174693-8775411430579560967-n.jpg" alt="Manufaktura Dzikie Smaki 14" width="400" height="300" loading="lazy" decoding="async" /></div>
+        <div class="gallery-item"><img src="https://i.postimg.cc/FK4NzM7K/706418715-122125067229174693-167181512608935399-n.jpg" alt="Manufaktura Dzikie Smaki 15" width="400" height="300" loading="lazy" decoding="async" /></div>
       </div>
     </div>
   </section>
@@ -1253,7 +1382,7 @@
   <footer id="footer">
     <div class="footer-container">
       <div class="footer-logo">
-        <img src="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" alt="Manufaktura Dzikie Smaki Logo" />
+        <img src="https://i.postimg.cc/LsYL4ZYT/700092457-122123829981174693-7084571627759370435-n.jpg" alt="Manufaktura Dzikie Smaki Logo" width="48" height="48" loading="lazy" decoding="async" />
         <div>
           <div class="footer-brand-name">MANUFAKTURA DZIKIE SMAKI</div>
           <div class="footer-tagline">Naturalnie dzika jakość</div>
